@@ -31,6 +31,15 @@ function reducer(state, {type, payload}) {
         return state
       }
 
+      // Will allow currentOperand to overwrite previousOperand
+      // ex: If you accidentally click x, can change it to + 
+      if (state.currentOperand == null) {
+        return {
+          ...state, 
+          operation: payload.operation,
+        }
+      }
+
       if (state.previousOperand == null) {
         return {
           ...state,
