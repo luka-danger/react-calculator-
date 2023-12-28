@@ -2,6 +2,7 @@ import { useReducer } from 'react';
 import DigitButton from './digitbutton';
 import OperationButton from './operationbutton';
 import './style.css'
+import { computeHeadingLevel } from '@testing-library/react';
 
 
 export const ACTIONS = {
@@ -38,9 +39,38 @@ function reducer(state, {type, payload}) {
           currentOperand: null,
         }
       }
+
+      return {
+        ...state,
+        previousOperand: evaluate(state),
+        operation: payload.operation,
+        currentOperand: null
+      }
     case ACTIONS.CLEAR:
       return{}
   }
+}
+
+function evaluate({ currentOperand, previousOperand, operation}) {
+  const prev = parseFloat(previousOperand)
+  const current = parseFloat(currentOperand)
+  if (isNaN(prev) || isNaN(current)) return ''
+  let computation = '' 
+  switch (operation) {
+    case '+':
+      computation = prev + current
+      break
+    case '-':
+      computation = prev - current
+      break
+    case 'x':
+      computation = prev * current
+      break
+    case '/':
+      computation = prev / current
+      break
+  }
+  return computation.toString();
 }
 
 function App() {
