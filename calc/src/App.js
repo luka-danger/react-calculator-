@@ -16,6 +16,17 @@ export const ACTIONS = {
 function reducer(state, {type, payload}) {
   switch(type) {
     case ACTIONS.ADD_DIGIT: 
+      // Overwrite currentOperand output
+      /* ex: if evaluating 12x3 = 36, clicking 2 
+      will overwrite output instead of adding it 
+      to the end of currentOperand (2 instead of 362) */ 
+      if (state.overwrite) {
+        return {
+          ...state,
+          currentOperand: payload.digit,
+          overwrite: false, 
+        }
+      }
       if (payload.digit === '0' && state.currentOperand === '0') {
         return state
       }
@@ -70,6 +81,7 @@ function reducer(state, {type, payload}) {
       // ex: Clicking = after 3 + 5 will output 8
       return {
         ...state,
+        overwrite: true, 
         previousOperand: null, 
         operation: null, 
         currentOperand: evaluate(state),
