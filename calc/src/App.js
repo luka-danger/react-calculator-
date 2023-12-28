@@ -66,7 +66,8 @@ function reducer(state, {type, payload}) {
         // Do nothing if = is clicked before second operand
         return state
       }
-
+      // Calls evaluate function 
+      // ex: Clicking = after 3 + 5 will output 8
       return {
         ...state,
         previousOperand: null, 
