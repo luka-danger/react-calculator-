@@ -1,4 +1,4 @@
-# react calculator
+# React Calculator
 ## Calculator built with React, JavaScript, CSS, and HTML 
 
 ## Description: 
