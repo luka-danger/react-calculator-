@@ -15,7 +15,7 @@ function reducer(state, {type, payload}) {
     case ACTIONS.ADD_DIGIT: 
       return {
         ...state, 
-        currentOperand: `${currentOperand || ''}${payload.digit}`
+        currentOperand: `${state.currentOperand || ''}${payload.digit}`
       }
   }
 }
@@ -33,7 +33,7 @@ function App() {
         </div>
         <button className='span-two'>AC</button>
         <button>DEL</button>
-        <DigitButton digit='/' displatch={dispatch} />
+        <DigitButton digit='/' dispatch={dispatch} />
         <button>1</button>
         <button>2</button>
         <button>3</button>
